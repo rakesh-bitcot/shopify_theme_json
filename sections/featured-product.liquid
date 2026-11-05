@@ -53,7 +53,7 @@
           {% capture img_wrapper_id %}{{ zoom_img_id }}-wrapper{% endcapture %}
           {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
-          {% include 'image-style' with small_style: true, width: height, height: height, wrapper_id: img_wrapper_id, img_id: img_id %}
+          {% include 'image-style' with small_style, small_style: true, width: height, height: height, wrapper_id: img_wrapper_id, img_id: img_id %}
 
           <div id="{{ img_wrapper_id }}" class="product-single__photo-wrapper js">
             <div id="{{ zoom_img_id }}" style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;" class="product-single__photo{% if enable_zoom %} js-zoom-enabled{% endif %}{% if product.images.size > 1 %} product-single__photo--has-thumbnails{% endif %}{% unless featured_image == image %} hide{% endunless %}" data-image-id="{{ image.id }}"{% if enable_zoom %} data-zoom="{{ image | img_url: product_image_zoom_size, scale: product_image_scale }}"{% endif %}>
@@ -315,3 +315,15 @@
     ]
   }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% include 'image-style' with small_style: true, width: height, height: height,
+    wrapper_id: img_wrapper_id, img_id: img_id %}"
+  to: "{% include 'image-style' with small_style, small_style: true, width: height,
+    height: height, wrapper_id: img_wrapper_id, img_id: img_id %}"
+  position: 2879..3017
+{% endcomment %}
